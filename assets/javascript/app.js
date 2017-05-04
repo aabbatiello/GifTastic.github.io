@@ -1,3 +1,4 @@
+ $(document).ready(function() {
  // Initial array of actors
 
  var topics = ["Marlon Brando", "Robert Dinero", "Al Pacino", "Joe Pesci", "James Gandolfini", 
@@ -22,9 +23,8 @@ function renderButtons() {
       }
 
 // Calls the intial buttons within the Array 
-$(document).ready(function() {
+
   renderButtons();
-});
 
 // This function handles events where a gangsta button is clicked
       $("#add-gangsta").on("click", function(event) {
@@ -84,8 +84,9 @@ $.ajax({
        // Giving the image tag an src attribute of a proprty pulled off the
       // result item
             personImage.attr("src", results[i].images.fixed_height.url);
-
-
+            personImage.attr("data-still", results[i].images.fixed_height.url);
+            personImage.attr("data-animate", results[i].images.fixed_height.url);
+            personImage.attr("data-state", results[i].images.fixed_height.url);
         // Appending the paragraph and personImage we created to the "gifDiv" div we created
             gifDiv.append(p);
             gifDiv.append(personImage);
@@ -97,19 +98,20 @@ $.ajax({
 
 $(document).on("click", ".gangstabutton", Gangsta);
 
-//function GangstaAnimate() {
-  //    if (state === "still") {
-    //    $(this).attr("src", $(this).attr("data-animate"));
-      //  $(this).attr("data-state", "animate");
-      //} else {
-       // $(this).attr("src", $(this).attr("data-still"));
-       // $(this).attr("data-state", "still");
-    //  }
-    //};
+function GangstaAnimate() {
+      if (state === "still") {
+        $(this).attr("src", $(this).attr("data-animate"));
+       $(this).attr("data-state", "animate");
+      } else {
+        $(this).attr("src", $(this).attr("data-still"));
+        $(this).attr("data-state", "still");
+      }
+    };
 
 
-  //$(document).on("click", "GangstaGif", GangstaAnimate);
+  $(document).on("click", "GangstaGif", GangstaAnimate);
 
+});
 
 
 
